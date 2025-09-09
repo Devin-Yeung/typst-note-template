@@ -1,0 +1,12 @@
+[formatter.yamlfmt]
+command = "yamlfmt"
+includes = ["*.yaml", "*.yml"]
+
+[formatter.nixfmt]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.typstyle]
+command = "typstyle"
+options = ["--inplace"]
+includes = ["*.typ"]
