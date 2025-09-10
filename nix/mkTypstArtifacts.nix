@@ -22,6 +22,7 @@ let
       commonArgs
       // {
         inherit src unstable_typstPackages;
+        typstOutput = "${name}.pdf";
       }
     );
 

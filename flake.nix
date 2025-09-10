@@ -1,5 +1,5 @@
 {
-  description = "A Typst project that uses Typst packages";
+  description = "A opinionated typst lecture notes template";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -23,7 +23,6 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (pkgs) lib;
 
         typixLib = typix.lib.${system};
 
@@ -63,7 +62,7 @@
           }
         ];
 
-        mkTypstArtifacts = import (nix/mkTypstArtifacts.nix);
+        mkTypstArtifacts = import ./nix/mkTypstArtifacts.nix;
 
         name = "lecture-notes";
         artifacts = mkTypstArtifacts {
@@ -75,6 +74,7 @@
       in
       {
         checks = artifacts.drvs;
+        packages = artifacts.drvs;
         apps = artifacts.apps // {
           default = artifacts.apps."watch-${name}";
         };
