@@ -54,13 +54,7 @@
           ];
         };
 
-        unstable_typstPackages = [
-          {
-            name = "physica";
-            version = "0.9.5";
-            hash = "sha256-tJOa6emrJO7I5SRaTmL0w8w1Bwo8di/F/F72XMJ47pM=";
-          }
-        ];
+        unstable_typstPackages = import ./nix/typstPackages.nix;
 
         mkTypstArtifacts = import ./nix/mkTypstArtifacts.nix;
 
