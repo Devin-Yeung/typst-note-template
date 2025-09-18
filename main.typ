@@ -54,3 +54,23 @@ def train_step(model, batch, optimizer, scaler):
 
     return loss.item(), (logits.argmax(1) == y).float().mean()
 ```
+
+== Symbol Lookup Table
+
+#table(
+  columns: (25%,) * 4,
+  [verbatim], [rendered], [verbatim], [rendered],
+  [`vb(a)`], $vb(a)$, [`va(a)`], $va(a)$,
+  [`vb(a) dprod vb(b)`],
+  $vb(a) dprod vb(b)$,
+  [`vb(a) cprod vb(b)`],
+  $vb(a) cprod vb(b)$,
+
+  [`iprod(vb(a), vb(b))`],
+  $iprod(vb(a), vb(b))$,
+  [`vb(W_1)^T + vb(W_2)^TT`],
+  $vb(W_1)^T + vb(W_2)^TT$,
+
+  [`grad`], $grad$, [`dd(vb(x))`], $dd(vb(x))$,
+  [`dd(y, [k])`], $dd(y, [k])$, [`dd(x, y, z)`], $dd(x, y, z)$,
+)

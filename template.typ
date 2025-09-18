@@ -1,11 +1,11 @@
 // package dependancies and show rules
 #import "@preview/physica:0.9.5": *
-
-#show: super-T-as-transpose
+#import "@preview/fletcher:0.5.8": diagram, edge, node
 
 // style and colors are credited to https://github.com/Carlos-Mero/may
 // fonts are opinionated, font size is optimized for A4 paper
 #let _template(doc) = [
+  #show: super-T-as-transpose
 
   // Page Configuration
   #let sea = rgb("#3b60a0")
@@ -157,4 +157,3 @@
   )
   #_template(doc)
 ]
-
