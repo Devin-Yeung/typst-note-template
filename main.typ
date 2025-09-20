@@ -57,30 +57,36 @@ def train_step(model, batch, optimizer, scaler):
 
 == Symbol Lookup Table
 
+// @typstyle off
 #table(
   columns: (25%,) * 4,
   [verbatim], [rendered], [verbatim], [rendered],
-  [`vb(a)`], $vb(a)$, [`va(a)`], $va(a)$,
-  [`vu(a)`], $vu(a)$, [`vecrow(x_1, x_2, x_3)`], $vecrow(x_1, x_2, x_3)$,
+  [`vb(a)`], $vb(a)$,
+  [`va(a)`], $va(a)$,
+  [`vu(a)`], $vu(a)$,
+  [`vecrow(x_1, x_2, x_3)`], $vecrow(x_1, x_2, x_3)$,
   [`vb(a) dprod vb(b)`],
   $vb(a) dprod vb(b)$,
   [`vb(a) cprod vb(b)`],
   $vb(a) cprod vb(b)$,
-
   [`iprod(vb(a), vb(b))`],
   $iprod(vb(a), vb(b))$,
   [`vb(W_1)^T + vb(W_2)^TT`],
   $vb(W_1)^T + vb(W_2)^TT$,
-
-  [`grad`], $grad$, [`dd(vb(x))`], $dd(vb(x))$,
-  [`dd(y, [k])`], $dd(y, [k])$, [`dd(x, y, z)`], $dd(x, y, z)$,
-  [`dv(f(x), x)`], $dv(f(x), x)$, [`pdv(f(x), x)`], $pdv(f(x), x)$,
-  [`dv(, x)`], $dv(, x)$, [`pdv(, x)`], $pdv(, x)$,
-  [`dv(f(x), x, 2)`], $dv(f(x), x, 2)$, [`pdv(f(x), x, 2)`], $pdv(f(x), x, 2)$,
+  [`grad`], $grad$,
+  [`dd(vb(x))`], $dd(vb(x))$,
+  [`dd(y, [k])`], $dd(y, [k])$,
+  [`dd(x, y, z)`], $dd(x, y, z)$,
+  [`dv(f(x), x)`], $dv(f(x), x)$,
+  [`pdv(f(x), x)`], $pdv(f(x), x)$,
+  [`dv(, x)`], $dv(, x)$,
+  [`pdv(, x)`], $pdv(, x)$,
+  [`dv(f(x), x, 2)`], $dv(f(x), x, 2)$,
+  [`pdv(f(x), x, 2)`], $pdv(f(x), x, 2)$,
   [`pdv(, x, y)`],
   $pdv(, x, y)$,
   [`pdv(, x, y, [2, 3])`],
   $pdv(, x, y, [2, 3])$,
-
   [`abs(a)`], $abs(a)$, [`norm(a)`], $norm(a)$,
 )
+// @typstyle on
