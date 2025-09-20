@@ -1,0 +1,91 @@
+#import "@preview/physica:0.9.5": *
+
+= Neural Network Optimization
+
+>| Advanced techniques for gradient-based learning with mathematical foundations
+
+Modern deep learning relies on sophisticated optimization algorithms that leverage gradient information to minimize complex loss landscapes. The interplay between batch normalization, adaptive learning rates, and regularization techniques creates robust training dynamics across diverse architectures.
+
+== Performance Comparison
+
+Recent advances in attention mechanisms have demonstrated remarkable improvements over traditional convolutional architectures. Self-attention allows models to capture long-range dependencies more effectively than local convolutions. The transformer architecture's success in natural language processing has naturally extended to computer vision tasks, where patch-based tokenization enables direct application of attention mechanisms to image data.
+
+#figure(
+  table(
+    columns: 3,
+    "Model", "Accuracy/%", "F1-Score/%",
+    table.hline(),
+    "ResNet-50", "76.2", "74.8",
+    "Vision Transformer", "82.1", "81.3",
+    "Our Method", "87.4", "86.9",
+    table.hline(),
+    align: (left, center, center),
+  ),
+  caption: [Classification results on ImageNet validation set.],
+)
+
+== Mathematical Foundations
+
+The optimization process combines several key mathematical concepts that govern convergence behavior and generalization performance.
+
+$
+  cal(L)(theta) &= 1/N sum_(i=1)^N ell(f_theta (x_i), y_i) + lambda Omega(theta) quad &"Loss Function"\
+  nabla_theta cal(L) &= 1/N sum_(i=1)^N nabla_theta ell(f_theta (x_i), y_i) + lambda nabla_theta Omega(theta) quad &"Gradient"\
+  theta_(t+1) &= theta_t - eta_t nabla_theta cal(L) quad &"SGD Update"\
+  m_t &= beta_1 m_(t-1) + (1-beta_1) nabla_theta cal(L) quad &"Adam Momentum"\
+  v_t &= beta_2 v_(t-1) + (1-beta_2) (nabla_theta cal(L))^2 quad &"Adam Variance"\
+  theta_(t+1) &= theta_t - (eta_t)/(sqrt(hat(v)_t) + epsilon) hat(m)_t quad &"Adam Update"
+$
+
+```python
+# Optimized training loop with mixed precision
+@torch.compile
+def train_step(model, batch, optimizer, scaler):
+    x, y = batch
+    with torch.autocast('cuda'):
+        logits = model(x)
+        loss = F.cross_entropy(logits, y)
+
+    scaler.scale(loss).backward()
+    scaler.step(optimizer)
+    scaler.update()
+    optimizer.zero_grad()
+
+    return loss.item(), (logits.argmax(1) == y).float().mean()
+```
+
+== Symbol Lookup Table
+
+// @typstyle off
+#table(
+  columns: (25%,) * 4,
+  [verbatim], [rendered], [verbatim], [rendered],
+  [`vb(a)`], $vb(a)$,
+  [`va(a)`], $va(a)$,
+  [`vu(a)`], $vu(a)$,
+  [`vecrow(x_1, x_2, x_3)`], $vecrow(x_1, x_2, x_3)$,
+  [`vb(a) dprod vb(b)`],
+  $vb(a) dprod vb(b)$,
+  [`vb(a) cprod vb(b)`],
+  $vb(a) cprod vb(b)$,
+  [`iprod(vb(a), vb(b))`],
+  $iprod(vb(a), vb(b))$,
+  [`vb(W_1)^T + vb(W_2)^TT`],
+  $vb(W_1)^T + vb(W_2)^TT$,
+  [`grad`], $grad$,
+  [`dd(vb(x))`], $dd(vb(x))$,
+  [`dd(y, [k])`], $dd(y, [k])$,
+  [`dd(x, y, z)`], $dd(x, y, z)$,
+  [`dv(f(x), x)`], $dv(f(x), x)$,
+  [`pdv(f(x), x)`], $pdv(f(x), x)$,
+  [`dv(, x)`], $dv(, x)$,
+  [`pdv(, x)`], $pdv(, x)$,
+  [`dv(f(x), x, 2)`], $dv(f(x), x, 2)$,
+  [`pdv(f(x), x, 2)`], $pdv(f(x), x, 2)$,
+  [`pdv(, x, y)`],
+  $pdv(, x, y)$,
+  [`pdv(, x, y, [2, 3])`],
+  $pdv(, x, y, [2, 3])$,
+  [`abs(a)`], $abs(a)$, [`norm(a)`], $norm(a)$,
+)
+// @typstyle on
